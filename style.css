@@ -109,7 +109,7 @@ a {
 }
 
 .hidden {
-  display: hidden;
+  display: none;
 }
 
 #joke-text {
