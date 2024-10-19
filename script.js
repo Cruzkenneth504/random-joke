@@ -1,15 +1,14 @@
-const giphyApiKey = "rhyFmIDFnBiyW9sSgeyJau9BjuybaNdT";
+const giphyApiKey = "rhyFmIDFnBiyW9sSgeyJau9BjuybaNdT"; // Add your API key here
 
 document.addEventListener('DOMContentLoaded', () => {
-  const image = document.getElementById('joke-img');
+  const image = document.getElementById('joke-img'); // default image
   const button = document.getElementById('joke-btn');
   const jokeText = document.getElementsByClassName('joke-text')[0];
   const paragraph = document.getElementById('joke-paragraph');
 
-  // Ensure the image is hidden by default
-  image.classList.add('hidden');
-
   button.addEventListener('click', async () => {
+    // Remove the default image and fetch a new GIF
+    image.classList.add('hidden');
     await getRandomGif();
     await getRandomJoke();
     paragraph.textContent = "Click again for a new joke";
@@ -19,8 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const response = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${giphyApiKey}&tag=funny`);
       const data = await response.json();
+      
+      // Set the fetched GIF to the image source
       image.src = data.data.images.original.url;
-      image.classList.remove('hidden'); // Show the image when a new GIF is fetched
+      image.classList.remove('hidden'); // Show the new GIF
     } catch (error) {
       console.error('Error fetching image:', error);
     }
@@ -39,5 +40,4 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Error fetching joke:', error);
     }
   }
-
 });
